@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sleep Calculator</title>
+</head>
+<body>
+    <h1>Sleep Calculator</h1>
+    <form method="POST">
+        <label for="bedtime">Select a bedtime:</label>
+        <select name="bedtime" id="bedtime">
+            {% for hour in range(0, 24) %}
+                {% for minute in ['00', '15', '30', '45'] %}
+                    <option value="{{ '{:02d}'.format(hour) }}:{{ minute|format }}">{{ '{:02d}'.format(hour) }}:{{ minute|format }}</option>
+                {% endfor %}
+            {% endfor %}
+        </select>
+        <button type="submit">Calculate</button>
+    </form>
+    {% if bedtime %}
+        <h2>You have selected a bedtime of {{ bedtime }}</h2>
+    {% endif %}
+    {% if wake_times %}
+        <h2>Best times to wake up:</h2>
+        {% for wake_time in wake_times %}
+            <li>{{wake_time}}</li>
+        {% endfor %}
+    {% endif %}
+    <p>
+        It takes the average person 20 minutes to fall asleep,
+        and one sleep cycle is roughly 90 minutes.
+        It's best to wake up between sleep cycles.
+    </p>
+</body>
+</html>
